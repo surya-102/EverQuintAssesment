@@ -1,31 +1,62 @@
-# EverQuint Assessment — Team Workflow Board
+# EverQuint Assessment
 
-Frontend interview assignment: a small Trello-style task board with its own component library, built with **React + TypeScript + Vite**.
+Solutions to the EverQuint Full Stack interview assignments. Each project is in its own folder with its own README.
 
-The project is in the [`team-workflow-board/`](./team-workflow-board) folder.
+| Folder | Assignment | Tech |
+|---|---|---|
+| [`team-workflow-board/`](./team-workflow-board) | Frontend: Team Workflow Board | React, TypeScript, Vite |
+| [`meeting-room-booking/`](./meeting-room-booking) | Backend: Meeting Room Booking Service | Python, Flask, SQLite |
+| [`max-profit/`](./max-profit) | Algorithm: Max Profit | C++ |
+| [`water-tank/`](./water-tank) | Algorithm: Water Tank | Vanilla JavaScript, HTML, CSS |
 
-## Quick start
+```bash
+git clone https://github.com/surya-102/EverQuintAssesment.git
+cd EverQuintAssesment
+```
+
+## Team Workflow Board
 
 Requires [Node.js](https://nodejs.org/) 18 or newer.
 
 ```bash
-git clone https://github.com/surya-102/EverQuintAssesment.git
-cd EverQuintAssesment/team-workflow-board
+cd team-workflow-board
 npm install
-npm run dev
+npm run dev      # open http://localhost:5173
+npm test         # run the tests
+npm run build    # type-check and build to dist/
 ```
 
-Then open **http://localhost:5173** in your browser.
+Details: [team-workflow-board/README.md](./team-workflow-board/README.md)
 
-## Other commands
+## Meeting Room Booking Service
 
-Run these inside `team-workflow-board/`:
+Requires Python 3.10 or newer.
 
-| Command         | What it does                                   |
-| --------------- | ---------------------------------------------- |
-| `npm test`      | Runs the tests (Vitest + React Testing Library) |
-| `npm run build` | Type-checks with TypeScript and builds to `dist/` |
+```bash
+cd meeting-room-booking
+python -m venv .venv
+.venv\Scripts\activate          # Windows  (macOS / Linux: source .venv/bin/activate)
+pip install -r requirements.txt
+python app.py                   # API at http://127.0.0.1:5000
+pytest -v                       # run the tests
+```
 
-## Documentation
+Details: [meeting-room-booking/README.md](./meeting-room-booking/README.md) and [DESIGN.md](./meeting-room-booking/DESIGN.md)
 
-See [`team-workflow-board/README.md`](./team-workflow-board/README.md) for the architecture overview, key decisions, storage migration, performance notes, tests and known limitations.
+## Max Profit
+
+Requires a C++ compiler such as g++.
+
+```bash
+cd max-profit
+g++ -o profits profits.cpp
+echo 13 | ./profits             # Earnings: $16500  T: 2 P: 0 C: 0
+```
+
+Details: [max-profit/README.md](./max-profit/README.md)
+
+## Water Tank
+
+No installation. Open `water-tank/index.html` in a browser, enter heights like `0,4,0,0,0,6,0,6,4,0` and click **Calculate**.
+
+Details: [water-tank/README.md](./water-tank/README.md)
