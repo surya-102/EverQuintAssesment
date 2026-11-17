@@ -67,7 +67,7 @@ Example run:
 
 ```
 Enter time units : 7
-Earnings:$ 3000
+Earnings: $3000
 Solutions
 T: 0 P: 1 C: 0
 T: 1 P: 0 C: 0

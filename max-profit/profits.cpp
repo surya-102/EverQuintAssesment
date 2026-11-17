@@ -45,7 +45,7 @@ int main(){
         }
     }
 
-    cout<<"Earnings:$ "<<dp[n].profit<<"\n";
+    cout<<"Earnings: $"<<dp[n].profit<<"\n";
     cout<<"Solutions\n";
     for( auto &c :dp[n].sols){
         cout<<"T: "<<c[0]<<" P: "<<c[1]<<" C: "<<c[2]<<"\n";
