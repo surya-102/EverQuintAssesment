@@ -15,49 +15,60 @@ unit of time it is operational. Given the total time `n`, find the mix of buildi
 
 ## Approach
 
-Recursion with memoization (dynamic programming).
+Bottom-up dynamic programming over time.
 
-`build(used, value)`: `used` is the time spent so far and `value` is how much the finished buildings earn
-per time unit.
+`dp[t]` holds the maximum profit possible with `t` time units left, plus every building mix that reaches it.
 
-At each step there are four choices:
-- stop building, and earn `value` for the remaining time
-- build a Theatre, a Pub or a Commercial Park, if it fits in the remaining time
+For each `t`, try building each type first:
+- it takes `d` time units to build, leaving `rem = t - d`
+- it then earns `rate` for each of the `rem` remaining units
+- the rest of the time is used in the best possible way, which is `dp[rem]`
 
-During construction the existing buildings keep earning (`value * buildTime`), then the new building's
-earnings are added to `value`. The best choice is returned, and results are cached in a map keyed on
-`(used, value)` so each state is only solved once.
+```
+dp[t] = max over buildings of ( rem * rate + dp[rem].profit )
+```
+
+A building that finishes exactly at the end (`t == d`) never earns anything, so it is skipped.
+When two choices give the same profit, both of their mixes are kept, so **all optimal solutions are printed**.
+
+Time complexity is O(n) states with 3 choices each.
 
 ## How to run
+
+### Option 1: use the ready-made exe (Windows)
+
+`profits.exe` is included and runs on any Windows PC, with nothing to install. Double-click it, or run it
+from a terminal:
+
+```bash
+profits.exe
+```
+
+Type the time units when asked and press Enter.
+
+### Option 2: compile it yourself
 
 You need a C++ compiler, for example g++ (MinGW / MSYS2 on Windows; `build-essential` on Linux; Xcode tools on macOS).
 
 ```bash
 g++ -o profits profits.cpp
-```
-
-Run it and type the time units when prompted:
-
-```bash
-# Windows
-profits.exe
-# macOS / Linux
 ./profits
-```
-
-Or pass the input directly:
-
-```bash
-echo 13 | ./profits
 ```
 
 ## Test cases
 
 | Input | Output |
 |---|---|
-| 7 | `Earnings: $3000` `T: 1 P: 0 C: 0` |
-| 8 | `Earnings: $4500` `T: 1 P: 0 C: 0` |
-| 13 | `Earnings: $16500` `T: 2 P: 0 C: 0` |
+| 7 | Earnings: $3000<br>T: 0 P: 1 C: 0<br>T: 1 P: 0 C: 0 |
+| 8 | Earnings: $4500<br>T: 1 P: 0 C: 0 |
+| 13 | Earnings: $16500<br>T: 2 P: 0 C: 0 |
 
-When several mixes give the same maximum earnings (for example `n = 7`, where `T: 1` and `P: 1` both earn
-$3000), the program prints one of them.
+Example run:
+
+```
+Enter time units : 7
+Earnings:$ 3000
+Solutions
+T: 0 P: 1 C: 0
+T: 1 P: 0 C: 0
+```

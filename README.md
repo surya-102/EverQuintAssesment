@@ -45,12 +45,14 @@ Details: [meeting-room-booking/README.md](./meeting-room-booking/README.md) and 
 
 ## Max Profit
 
-Requires a C++ compiler such as g++.
+On Windows, just run the included `max-profit/profits.exe` (no compiler needed) and enter the time units.
+
+Or compile it yourself with a C++ compiler such as g++:
 
 ```bash
 cd max-profit
 g++ -o profits profits.cpp
-echo 13 | ./profits             # Earnings: $16500  T: 2 P: 0 C: 0
+./profits                       # enter 13 -> Earnings: $16500, T: 2 P: 0 C: 0
 ```
 
 Details: [max-profit/README.md](./max-profit/README.md)

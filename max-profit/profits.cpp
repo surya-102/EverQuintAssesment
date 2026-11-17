@@ -1,49 +1,54 @@
-
 #include<bits/stdc++.h>
 using namespace std;
 
-struct Result{
-    int profit,t,p,c;
+struct Building {
+    char name;
+    int time;
+    int rate;
 };
 
-map<pair<int,int>,Result> m;
-int n;
 
-Result build(int used ,int value){
-    pair<int,int> key = {used,value};
-    if(m.find(key)!=m.end()){
-        return m[key];
-    }
-    int balance=n-used;
-    Result ans={value*balance,0,0,0};
-    if(used+5<=n){
-        Result solve=build(used+5,value+1500);
-        int profit=value*5+solve.profit;
-        if(profit>ans.profit){
-            ans={profit,solve.t+1,solve.p,solve.c};
-        }
-    }
-    if(used+4<=n){
-        Result solve=build(used+4,value+1000);
-        int profit=value*4+solve.profit;
-        if(profit>ans.profit){
-            ans={profit,solve.t,solve.p+1,solve.c};
-        }
-    }
-    if(used+10<=n){
-        Result solve=build(used+10,value+2000);
-        int profit=value*10+solve.profit;
-        if(profit>ans.profit){
-            ans={profit,solve.t,solve.p,solve.c+1};
-        }
-    }
-    return m[key]=ans;
-}
+const Building B[3]={ {'T',5,1500},{'P',4,1000},{'C',10,2000}};
+
+struct State{
+    int profit=0;
+    set<array<int,3>> sols;
+};
+
 int main(){
+    int n;
+    cout<<"Enter time units : ";
     cin>>n;
-    m.clear();
-    Result ans=build(0,0);
-    cout<<"Earnings: $"<<ans.profit<<endl;
-    cout<<"T: "<<ans.t<<" P: "<<ans.p<<" C: "<<ans.c<<endl;
+
+    vector<State> dp(n+1);
+    dp[0].sols.insert({0,0,0});
+    for(int t=1;t<=n;++t){
+        dp[t].profit=0;
+        dp[t].sols.insert({0,0,0});
+        for(int i=0;i<3;++i){
+            int d=B[i].time;
+            if(t<=d) continue;
+            int rem=t-d;
+            int ans=rem*B[i].rate+dp[rem].profit;
+            if(ans>dp[t].profit){
+                dp[t].profit=ans;
+                dp[t].sols.clear();
+            }
+
+            if(ans==dp[t].profit){
+                 for(array<int,3> c:dp[rem].sols){
+                    c[i]++;
+                    dp[t].sols.insert(c);
+                 }
+            }
+
+        }
+    }
+
+    cout<<"Earnings:$ "<<dp[n].profit<<"\n";
+    cout<<"Solutions\n";
+    for( auto &c :dp[n].sols){
+        cout<<"T: "<<c[0]<<" P: "<<c[1]<<" C: "<<c[2]<<"\n";
+    }
     return 0;
 }
