@@ -19,6 +19,10 @@ int main(){
     long long n;
     cout<<"Enter time units : ";
     cin>>n;
+    if(n<0){
+        cout<<"Invalid input: time units cannot be negative.\n";
+        return 1;
+    }
 
     vector<State> dp(n+1);
     dp[0].sols.insert({0,0,0});

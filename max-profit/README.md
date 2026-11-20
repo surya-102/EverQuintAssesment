@@ -86,6 +86,8 @@ g++ -o profit_zero_earn profit_zero_earn.cpp
 | 13 | Earnings: $16500<br>T: 2 P: 0 C: 0 |
 | 49 | Earnings: $324000<br>T: 8 P: 2 C: 0<br>T: 9 P: 0 C: 0 |
 
+A negative input prints `Invalid input: time units cannot be negative.` and exits.
+
 Example run:
 
 ```
